@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 
 app.get("/", ({}, res) => {
-  res.json({ message: "Hello World!" });
+  res.json({ message: "Hello World" });
 });
 
 app.use("/api/v1/tasks/", tasks);
