@@ -7,6 +7,9 @@ tasks.post("/", (req, res) => {
   // Logic to create a new task
   // Access data from req.body
   // Save to database
+  console.log(result);
+  console.log(req.body);
+  res.send(req.body);
   res.status(201).json(result);
 });
 
