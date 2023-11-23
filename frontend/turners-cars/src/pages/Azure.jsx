@@ -12,10 +12,8 @@ const AzureComputerVisionApp = () => {
   const [carImage, setCarImage] = useState(null);
 
   const analyzeImage = async () => {
-    const apiKey = "cfe2cdcec7af4679a6545fcb4868849a";
-    const endpoint =
-      "https://jason-vision.cognitiveservices.azure.com/computervision/imageanalysis:analyze?api-version=2023-02-01-preview&features=tags&language=en&gender-neutral-caption=False";
-
+    const apiKey = process.env.REACT_APP_AZURE_API_KEY;
+    const endpoint = process.env.REACT_APP_AZURE_ENDPOINT;
     // const params = {
     //   visualFeatures: "Categories,Description,Color",
     //   details: "",
