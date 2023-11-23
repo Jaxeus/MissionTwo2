@@ -23,6 +23,7 @@ const AzureComputerVisionApp = () => {
     // };
     // /vision/v3.1/analyze (cut)
     try {
+      console.log(imageUrl);
       const response = await axios.post(
         `${endpoint}`,
         { url: imageUrl },
@@ -36,9 +37,15 @@ const AzureComputerVisionApp = () => {
       );
 
       //-----------------FUNCTIONAL CODE-----------------//
-      if (
-        response.data.tagsResult.values.filter((item) => item.name === "car")
-      ) {
+      // Andrew helped with the below
+      const tagResults = response.data.tagsResult;
+      const carFilter = tagResults
+        ? tagResults.values.filter((item) => item.name === "car")
+        : [];
+
+      console.log(response.data.tagResults);
+      if (carFilter.length > 0) {
+        //Andrew helped with the above
         console.log("This is a car");
         setResult(
           `This is indeed a ${
@@ -48,7 +55,7 @@ const AzureComputerVisionApp = () => {
           }`
         );
         setCarImage(
-          <img width="200px" height="auto" alt="car" src={imageUrl} />
+          <img width="300px" height="auto" alt="car" src={imageUrl} />
         );
       } else {
         console.log(
@@ -58,7 +65,7 @@ const AzureComputerVisionApp = () => {
           `This image doesn't appear to contain a Either the Azure Computer Vision has failed, or you should have gone to Specsavers`
         );
         setCarImage(
-          <img width="200px" height="auto" alt="car" src={imageUrl} />
+          <img width="300px" height="auto" alt="car" src={imageUrl} />
         );
       }
 
@@ -95,17 +102,20 @@ const AzureComputerVisionApp = () => {
 
   return (
     <div className={styles.azureContainer}>
-      <input
-        type="text"
-        placeholder="Enter image URL"
-        value={imageUrl}
-        onChange={(e) => setImageUrl(e.target.value)}
-      />
-      <button onClick={analyzeImage}>Analyze Image</button>
+      <div className={styles.formContainer}>
+        <h2>Analyse your car!</h2>
+        <input
+          type="text"
+          placeholder="Enter image URL"
+          value={imageUrl}
+          onChange={(e) => setImageUrl(e.target.value)}
+        />
+        <button onClick={analyzeImage}>Analyse Image</button>
+      </div>
 
       {result && (
         <div>
-          <h2>Analysis Result:</h2>
+          <h3 className={styles.resultHeading}>Analysis Result:</h3>
           <pre>{JSON.stringify(result, null, 2)}</pre>
         </div>
       )}
