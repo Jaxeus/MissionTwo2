@@ -2,6 +2,7 @@ import "./App.css";
 import TopMenu from "./pages/TopMenu";
 import Header from "./pages/Header";
 import MainMenu from "./pages/MainMenu";
+import AzureComputerVisionApp from "./pages/Azure";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <TopMenu />
       <Header />
       <MainMenu />
+      <AzureComputerVisionApp />
     </div>
   );
 }
